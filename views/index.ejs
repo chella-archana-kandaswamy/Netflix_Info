@@ -115,12 +115,24 @@
             axios.get('/netflix/get')
                 .then(resp => {
                     var results = resp;
-                    var dataRes = {};
+                    var dataRes = [];
+                    var info = {};
                     console.log(Object.keys(results));
-                    Object.keys(results).forEach(function (key) {
-                        dataRes = key;                        
-                        console.log(dataRes);
-                    }); 
+                     
+                    dataRes.push(results['data']);
+                   console.log("data",dataRes);
+
+                   Object.keys(dataRes).forEach(function (key) {
+                      info = dataRes[key]['data'];
+                    });
+
+                    console.log("final",info);
+
+                    for (let index = 0; index < info.length; index++) {
+                        document.getElementById("getId").innerHTML += info[index]['_id']+"<br/>";
+
+                        
+                    }
                 });
         }
     </script>
