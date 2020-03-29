@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+    <div class="container">
+        <h1>Netflix Movies and Shows</h1>
+        
+        <label for ="showId">ID</label><br/>
+        <input type="text" id="showId" placeholder="Enter the id" name="showId" required><br />
+
+        <label for ="type">TYPE</label><br/>
+        <input type="text" id="type" placeholder="Enter type" name="type" required><br />
+
+        <label for ="title">TITLE</label><br/>
+        <input type="text" id="title" placeholder="Enter title" name="title" required></br>
+
+        <label for ="release_year">RELEASE YEAR</label><br/>
+        <input type="text" id="release_year" placeholder="Enter release Year" name="release_year" required><br />
+
+        <label for ="genere">GENERE</label><br/>
+        <input type="text" id="genere" placeholder="Enter genere" name="genere" required><br />
+        <br/>
+
+        <label for ="postPrint">Result: </label>
+        <p id="getId"></p>
+        <p id="getType"></p>
+        <p id="getTitle"></p>
+        <p id="postPrint"></p>
+        <br/>
+        
+        <button onclick="callGetAPI()">GET</button>
+
+        <button onclick="callPostAPI()" class="btn-submit">POST</button>
+
+        <button onclick="callDeleteAPI()" class="btn-delete">DELETE</button>
+
+        <button onclick="callPutAPI()" class="btn-put">PUT</button>
+                                                                                                                    
+        <button onclick="callPatchAPI()" class="btn-patch">PATCH</button>
+    </div>
+
+    <script>
+        function callPostAPI() {
+            let type = document.getElementById('type').value;
+            let title = document.getElementById('title').value;
+            let release_year = document.getElementById('release_year').value;
+            let genere = document.getElementById('genere').value;
+            axios.post('/netflix/', {
+                type: type,
+                title: title,
+                release_year: release_year,
+                genere: genere
+            }).then(resp => {
+                document.getElementById("postPrint").innerHTML = "Information is added to the database";
+            });
+        }
+    </script>
+
+
+    <script>
+        function callPutAPI() {
+            let _id = document.getElementById('showId').value;
+            let type = document.getElementById('type').value;
+            let title = document.getElementById('title').value;
+            let release_year = document.getElementById('release_year').value;
+            let genere = document.getElementById('genere').value;
+            axios.put('http://localhost:3000/netflix/'+_id, {
+                _id: showId,
+                type: type,
+                title: title,
+                release_year: release_year,
+                genere: genere
+            }).then(resp => {
+                document.getElementById("postPrint").innerHTML = "Updated Successfully";
+            });
+        }
+    </script>
+
+    <script>
+        function callPatchAPI() {
+            let _id = document.getElementById('showId').value;
+            let type = document.getElementById('type').value;
+            axios.put('http://localhost:3000/netflix/'+_id, {
+                _id: showId,
+                type: type,
+            }).then(resp => {
+                document.getElementById("postPrint").innerHTML = "Patch call has been successful";
+            });
+        }
+    </script>
+
+    <script>
+        function callDeleteAPI() {
+            let _id = document.getElementById('showId').value;
+            axios.delete('http://localhost:3000/netflix/'+_id, {
+                _id: _id
+            }).then(resp => {
+                document.getElementById("postPrint").innerHTML = "Deleted successfully";
+            });
+        }
+    </script>
+
+    <script>
+        function callGetAPI() {
+            console.log("inside get api call");
+            axios.get('/netflix/get')
+                .then(resp => {
+                    var results = resp;
+                    var dataRes = {};
+                    console.log(Object.keys(results));
+                    Object.keys(results).forEach(function (key) {
+                        dataRes = key;                        
+                        console.log(dataRes);
+                    }); 
+                });
+        }
+    </script>
+
+
+</body>
+
+</html>
