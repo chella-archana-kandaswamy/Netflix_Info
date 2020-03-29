@@ -39,7 +39,7 @@ app.use(session({
     secret: 'netflix'
 }));
 
-mongoose.connect('mongodb://localhost/netflix', {
+mongoose.connect('mongodb+srv://ckandasw:Guruman@netflixcluster-hurmw.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true
 });
 
@@ -88,7 +88,7 @@ db.once('open', function () {});
 
 /**
  * @swagger
- * /netflix/:_id:
+ * /netflix/{_id}:
  *    put:
  *      description: Use to update a netflix info
  *    parameters:
@@ -98,6 +98,8 @@ db.once('open', function () {});
  *        schema:
  *          type: object
  *          properties:
+ *            _id:
+ *              type: string
  *            type:
  *              type: string
  *            title:
@@ -113,7 +115,7 @@ db.once('open', function () {});
 
 /**
  * @swagger
- * /netflix/:_id:
+ * /netflix/{_id}:
  *    patch:
  *      description: Use to edit a netflix info
  *    parameters:
@@ -139,17 +141,19 @@ db.once('open', function () {});
 
 /**
  * @swagger
- * /netflix/:_id:
+ * /netflix/{_id}:
  *    delete:
  *      description: Use to delete a netflix info
  *    parameters:
  *      - name: _id
  *        in: path
  *        description: Netflix Id  
+ *        required: true
+ *        type: string  
  *        schema:
  *          type: object  
  *    responses:
- *      '201':
+ *      '200':
  *        description: Successfully deleted netflix record
  */  
 app.use('/netflix', netflixController);
