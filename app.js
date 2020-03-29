@@ -39,8 +39,9 @@ app.use(session({
     secret: 'netflix'
 }));
 
-mongoose.connect('mongodb+srv://ckandasw:Guruman@netflixcluster-hurmw.mongodb.net/test?retryWrites=true&w=majority', {
-    useNewUrlParser: true
+mongoose.connect('mongodb+srv://ckandasw:Guruman@netflixcluster-hurmw.mongodb.net/netflix?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
 
 var db = mongoose.connection;
