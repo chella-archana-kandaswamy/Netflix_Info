@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="../stylesheets/styles.css" rel="stylesheets">
+    <title>Netflix Database</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 
-    <div class="container">
+    <div class="container" style="margin: auto; width: 50%; border: 3px solid green; padding: 10px">
         <h1>Netflix Movies and Shows</h1>
 
         <label for="showId">ID</label><br />
@@ -46,145 +45,145 @@
         <p id="getGenere"></p> -->
         <br />
 
-        <table class="table table-striped"id="table-striped" style="visibility: hidden;">
-            <tr  class="bg-info">
+        <table class="table table-striped" id="table-striped" style="visibility: hidden;">
+            <tr class="bg-info">
                 <th>ID</th>&nbsp
                 <th>Type</th>&nbsp
                 <th>Title</th>&nbsp
                 <th>Release_Year</th>&nbsp
                 <th>Genere</th>
             </tr>
-        
+
             <tbody id="myTable">
-                
+
             </tbody>
         </table>
 
-        <button onclick="callGetAPI()">GET</button>
+        <button onclick="callGetAPI()" style="background-color: #45a049;">GET</button>
 
-        <button onclick="callPostAPI()" class="btn-submit">POST</button>
+        <button onclick="callPostAPI()" style="background-color: #45a049;" class="btn-submit">POST</button>
 
-        <button onclick="callDeleteAPI()" class="btn-delete">DELETE</button>
+        <button onclick="callDeleteAPI()" style="background-color: #45a049;" class="btn-delete">DELETE</button>
 
-        <button onclick="callPutAPI()" class="btn-put">PUT</button>
+        <button onclick="callPutAPI()" style="background-color: #45a049;" class="btn-put">PUT</button>
 
-        <button onclick="callPatchAPI()" class="btn-patch">PATCH</button>
-
-        
-
-    <script>
-        function callPostAPI() {
-            let type = document.getElementById('type').value;
-            let title = document.getElementById('title').value;
-            let release_year = document.getElementById('release_year').value;
-            let genere = document.getElementById('genere').value;
-            axios.post('/netflix/', {
-                type: type,
-                title: title,
-                release_year: release_year,
-                genere: genere
-            }).then(resp => {
-                document.getElementById("postPrint").innerHTML = "Information is added to the database";
-            });
-        }
-    </script>
+        <button onclick="callPatchAPI()" style="background-color: #45a049;" class="btn-patch">PATCH</button>
 
 
-    <script>
-        function callPutAPI() {
-            let _id = document.getElementById('showId').value;
-            let type = document.getElementById('type').value;
-            let title = document.getElementById('title').value;
-            let release_year = document.getElementById('release_year').value;
-            let genere = document.getElementById('genere').value;
-            axios.put('http://localhost:3000/netflix/'+ _id, {
-                _id: showId,
-                type: type,
-                title: title,
-                release_year: release_year,
-                genere: genere
-            }).then(resp => {
-                document.getElementById("postPrint").innerHTML = "Updated Successfully";
-            });
-        }
-    </script>
 
-    <script>
-        function callPatchAPI() {
-            let _id = document.getElementById('showId').value;
-            let type = document.getElementById('type').value;
-            axios.put('http://localhost:3000/netflix/'+ _id, {
-                _id: showId,
-                type: type
-            }).then(resp => {
-                document.getElementById("postPrint").innerHTML = "Patch call has been successful";
-            });
-        }
-    </script>
+        <script>
+            function callPostAPI() {
+                let type = document.getElementById('type').value;
+                let title = document.getElementById('title').value;
+                let release_year = document.getElementById('release_year').value;
+                let genere = document.getElementById('genere').value;
+                axios.post('/netflix/', {
+                    type: type,
+                    title: title,
+                    release_year: release_year,
+                    genere: genere
+                }).then(resp => {
+                    document.getElementById("postPrint").innerHTML = "Information is added to the database";
+                });
+            }
+        </script>
 
-    <script>
-        function callDeleteAPI() {
-            let _id = document.getElementById('showId').value;
-            axios.delete('http://localhost:3000/netflix/'+ _id, {
-                _id: _id
-            }).then(resp => {
-                document.getElementById("postPrint").innerHTML = "Deleted successfully";
-            });
-        }
-    </script>
 
-    <script>
-        function callGetAPI() {
-            document.getElementById("table-striped").style.visibility="visible";
-            var table = document.getElementById('myTable');
+        <script>
+            function callPutAPI() {
+                let _id = document.getElementById('showId').value;
+                let type = document.getElementById('type').value;
+                let title = document.getElementById('title').value;
+                let release_year = document.getElementById('release_year').value;
+                let genere = document.getElementById('genere').value;
+                axios.put('http://localhost:3000/netflix/' + _id, {
+                    _id: showId,
+                    type: type,
+                    title: title,
+                    release_year: release_year,
+                    genere: genere
+                }).then(resp => {
+                    document.getElementById("postPrint").innerHTML = "Updated Successfully";
+                });
+            }
+        </script>
 
-            var heading = new Array();
-            heading[0] = "ID";
-            heading[1] = "TYPE"
-            heading[2] = "TITLE"
-            heading[3] = "RELEASE_YEAR"
-            heading[4] = "GENRE";
+        <script>
+            function callPatchAPI() {
+                let _id = document.getElementById('showId').value;
+                let type = document.getElementById('type').value;
+                axios.put('http://localhost:3000/netflix/' + _id, {
+                    _id: showId,
+                    type: type
+                }).then(resp => {
+                    document.getElementById("postPrint").innerHTML = "Patch call has been successful";
+                });
+            }
+        </script>
 
-            console.log("inside get api call");
-            axios.get('/netflix/get')
-                .then(resp => {
-                    var results = resp;
-                    var dataRes = [];
-                    var info = {};
-                    console.log(Object.keys(results));
+        <script>
+            function callDeleteAPI() {
+                let _id = document.getElementById('showId').value;
+                axios.delete('http://localhost:3000/netflix/' + _id, {
+                    _id: _id
+                }).then(resp => {
+                    document.getElementById("postPrint").innerHTML = "Deleted successfully";
+                });
+            }
+        </script>
 
-                    dataRes.push(results['data']);
-                    console.log("data", dataRes);
+        <script>
+            function callGetAPI() {
+                document.getElementById("table-striped").style.visibility = "visible";
+                var table = document.getElementById('myTable');
 
-                    Object.keys(dataRes).forEach(function (key) {
-                        info = dataRes[key]['data'];
-                    });
+                var heading = new Array();
+                heading[0] = "ID";
+                heading[1] = "TYPE"
+                heading[2] = "TITLE"
+                heading[3] = "RELEASE_YEAR"
+                heading[4] = "GENRE";
 
-                    console.log("final", info);
+                console.log("inside get api call");
+                axios.get('/netflix/get')
+                    .then(resp => {
+                        var results = resp;
+                        var dataRes = [];
+                        var info = {};
+                        console.log(Object.keys(results));
 
-                    for (let index = 0; index < info.length; index++) {
-                        var row = `<tr>
+                        dataRes.push(results['data']);
+                        console.log("data", dataRes);
+
+                        Object.keys(dataRes).forEach(function (key) {
+                            info = dataRes[key]['data'];
+                        });
+
+                        console.log("final", info);
+
+                        for (let index = 0; index < info.length; index++) {
+                            var row = `<tr>
 							<td>${info[index]['_id']}</td>&nbsp
 							<td>${info[index]['type']}</td>&nbsp
                             <td>${info[index]['title']}</td>&nbsp
                             <td>${info[index]['release_year']}</td>&nbsp
                             <td>${info[index]['genere']}</td>
 					  </tr>`
-			table.innerHTML += row
+                            table.innerHTML += row
 
-                        // document.getElementById("heading").innerHTML = heading[0] + "<br/>" + heading[1] + "<br/>" +
-                        //     heading[2] + "<br/>" + heading[3] + "<br/>" + heading[4];
-                        // document.getElementById("getId").innerHTML += info[index]['_id'] + "<br/>";
-                        // document.getElementById("getType").innerHTML += info[index]['type'] + "<br/>";;
-                        // document.getElementById("getTitle").innerHTML += info[index]['title'] + "<br/>";
-                        // document.getElementById("getReleaseYear").innerHTML += info[index]['release_year'] +
-                        //     "<br/>";
-                        // document.getElementById("getGenere").innerHTML += info[index]['genere'] + "<br/>";
-                    }
-                    document.getElementById("postPrint").innerHTML = "Data retrieved successfully";
-                });
-        }
-    </script>
+                            // document.getElementById("heading").innerHTML = heading[0] + "<br/>" + heading[1] + "<br/>" +
+                            //     heading[2] + "<br/>" + heading[3] + "<br/>" + heading[4];
+                            // document.getElementById("getId").innerHTML += info[index]['_id'] + "<br/>";
+                            // document.getElementById("getType").innerHTML += info[index]['type'] + "<br/>";;
+                            // document.getElementById("getTitle").innerHTML += info[index]['title'] + "<br/>";
+                            // document.getElementById("getReleaseYear").innerHTML += info[index]['release_year'] +
+                            //     "<br/>";
+                            // document.getElementById("getGenere").innerHTML += info[index]['genere'] + "<br/>";
+                        }
+                        document.getElementById("postPrint").innerHTML = "Data retrieved successfully";
+                    });
+            }
+        </script>
 
 
 </body>
