@@ -54,6 +54,8 @@ db.once('open', function () {});
  * @swagger
  * /netflix/get:
  *  get:
+ *    tags:
+ *     - netflix
  *    description: Use to request all netflix info
  *    responses:
  *      '200':
@@ -66,77 +68,103 @@ db.once('open', function () {});
  * @swagger
  * /netflix/:
  *    post:
+ *      tags:
+ *       - netflix
  *      description: Use to create a netflix info
- *    parameters:
- *      - name: netflix
- *        in: body
- *        description: Netflix Data  
- *        schema:
- *          type: object
- *          properties:
- *            type:
- *              type: string
- *            title:
- *              type: string
- *            release_year:
- *              type: string
- *            genere:
- *              type: string    
- *    responses:
- *      '201':
- *        description: Successfully created netflix record
+ *      security:
+ *       - bearerAuth: []
+ *      consumes:
+ *       - application/json
+ *      produces:
+ *       - application/json
+ *      parameters:
+ *        - name: netflix
+ *          in: body
+ *          description: Netflix Data  
+ *          schema:
+ *            type: object
+ *            properties:
+ *               type:
+ *                 type: string
+ *               title:
+ *                 type: string
+ *               release_year:
+ *                 type: string
+ *               genere:
+ *                 type: string    
+ *      responses:
+ *        '200':
+ *           description: Successfully created netflix record
  */
 
 /**
  * @swagger
  * /netflix/{_id}:
  *    put:
+ *      tags:
+ *       - netflix
  *      description: Use to update a netflix info
- *    parameters:
- *      - name: netflix
- *        in: body
- *        description: Netflix Data  
- *        schema:
- *          type: object
- *          properties:
- *            _id:
- *              type: string
- *            type:
- *              type: string
- *            title:
- *              type: string
- *            release_year:
- *              type: string
- *            genere:
- *              type: string    
- *    responses:
- *      '201':
- *        description: Successfully created netflix record
+ *      security:
+ *       - bearerAuth: []
+ *      consumes:
+ *       - application/json
+ *      produces:
+ *       - application/json
+ *      parameters:
+ *        - name: _id
+ *          description: Movie's Id
+ *          in: path
+ *          required: true
+ *          type: string    
+ *        - name: netflix
+ *          in: body
+ *          description: Netflix Data  
+ *          schema:
+ *            type: object
+ *            properties:
+ *               type:
+ *                 type: string
+ *               title:
+ *                 type: string
+ *               release_year:
+ *                 type: string
+ *               genere:
+ *                 type: string    
+ *      responses:
+ *        '200':
+ *           description: Successfully created netflix record
  */ 
 
 /**
  * @swagger
  * /netflix/{_id}:
  *    patch:
+ *      tags:
+ *       - netflix
  *      description: Use to edit a netflix info
- *    parameters:
- *      - name: netflix
- *        in: path,body
- *        description: Netflix Data  
- *        schema:
- *          type: object
- *          properties:
- *            type:
- *              type: string
- *            title:
- *              type: string
- *            release_year:
- *              type: string
- *            genere:
- *              type: string    
- *    responses:
- *      '201':
- *        description: Successfully created netflix record
+ *      security:
+ *       - bearerAuth: []
+ *      consumes:
+ *       - application/json
+ *      produces:
+ *       - application/json
+ *      parameters:
+ *        - name: _id
+ *          description: Movie's Id
+ *          in: path
+ *          required: true
+ *          type: string
+ *        - name: netflix
+ *          in: body
+ *          description: Netflix Data  
+ *          schema:
+ *            type: object
+ *            properties:
+ *               type:
+ *                 type: string    
+ *      responses:
+ *        '200':
+ *           description: Successfully created netflix record
  */ 
 
 
@@ -144,18 +172,24 @@ db.once('open', function () {});
  * @swagger
  * /netflix/{_id}:
  *    delete:
+ *      tags:
+ *       - netflix
  *      description: Use to delete a netflix info
- *    parameters:
- *      - name: _id
- *        in: path
- *        description: Netflix Id  
- *        required: true
- *        type: string  
- *        schema:
- *          type: object  
- *    responses:
- *      '200':
- *        description: Successfully deleted netflix record
+ *      security:
+ *       - bearerAuth: []
+ *      consumes:
+ *       - application/json
+ *      produces:
+ *       - application/json
+ *      parameters:
+ *        - name: _id
+ *          in: path
+ *          description: Netflix Id  
+ *          required: true
+ *          type: string   
+ *      responses:
+ *       '200':
+ *          description: Successfully deleted netflix record
  */  
 app.use('/netflix', netflixController);
 

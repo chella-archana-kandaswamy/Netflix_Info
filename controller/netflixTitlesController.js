@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
-var lodash = require('lodash');
 var netflixModel = require('./../model/netflixTitles');
 var netflixData = require('./../utility/netflixTitlesDB');
 
