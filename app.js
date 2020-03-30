@@ -132,7 +132,7 @@ db.once('open', function () {});
  *                 type: string    
  *      responses:
  *        '200':
- *           description: Successfully created netflix record
+ *           description: Successfully updated netflix record
  */ 
 
 /**
@@ -164,7 +164,7 @@ db.once('open', function () {});
  *                 type: string    
  *      responses:
  *        '200':
- *           description: Successfully created netflix record
+ *           description: Successfully edited netflix record
  */ 
 
 
