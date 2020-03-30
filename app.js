@@ -6,6 +6,8 @@ var mongoose = require('mongoose');
 var swaggerJsDoc = require("swagger-jsdoc");
 var swaggerUi = require("swagger-ui-express");
 var netflixController = require('./controller/netflixTitlesController');
+var cors = require('cors');
+app.use(cors());
 
 const swaggerOptions = {
     swaggerDefinition: {
